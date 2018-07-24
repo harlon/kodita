@@ -1,0 +1,39 @@
+{% include 'header.twig' %}
+
+<div class="posts">
+    
+    {% for post in search_results %}
+    
+        <div class="post">
+            <div class="title">
+                {% if post.link|length > 0 %}
+                    <a href="{{ post.link }}">
+                        {{ post.title }}
+                    </a>
+                {% else %}
+                    <a href="post/{{ post.hashId }}">
+                        {{ post.title }}
+                    </a>
+                {% endif %}
+            </div>
+            
+            <div class="info">
+                <em><a href="post/{{ post.hashId }}"><time title="{{ post.created|title }}" datetime="{{ post.created|datetime }}"> {{ post.created|ago }}</time></a></em>
+                por <a href="{{ ('user/' ~ post.username|url_encode)|docroot }}">{{ post.username }}</a>
+                —
+                <a href="post/{{ post.hashId }}#comments">{{ post.commentsCount ? post.commentsCount }} comentarios</a>
+            </div>
+        </div>
+        
+    {% endfor %}
+    
+    {# Add once I'll have fulltext search
+    <div class="more">
+        <a href="?page={{ page + 1 }}" class="button button_default1">
+            More
+        </a>
+    </div>
+    #}
+</div>
+
+{% include 'footer.twig' %}

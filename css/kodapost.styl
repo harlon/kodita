@@ -1,0 +1,327 @@
+@require 'reset.styl'
+
+body
+    > .container
+        margin      auto
+        max-width   80%
+    
+        /* Page header */
+        > .header
+            padding     1em 0
+            text-align  center
+            
+            > .flex-container
+                display         flex
+                flex-direction  row
+                flex-wrap       wrap
+                justify-content space-between
+                align-content   stretch
+                align-items     flex-start
+                
+                width           80%
+                margin          auto
+                
+                > .flex-item
+                    order       0
+                    flex        0 1 auto
+                    align-self  auto
+                        
+                    /* Logo text */
+                    a.logo,
+                    a.logo:hover,
+                    a.logo:visited
+                        color           #000
+                        font-weight     bold
+                        text-decoration none
+                    
+                        /* Logo picture */
+                        img
+                            height          1.5em
+                            margin          0 1em
+                            vertical-align  middle
+            
+            /* Menu under the logo */
+            > .menu
+                display         flex
+                flex-direction  row
+                flex-wrap       wrap
+                justify-content flex-end
+                align-content   flex-start
+                align-items     flex-start
+                
+                margin          1em auto
+                width           80%
+                
+                > .flex-item
+                    flex            0 1 auto
+                    align-self      auto
+                    order           0
+                    
+                    border          0
+                    border-bottom   1px solid transparent
+                    margin          .5em 1em
+                    padding         .2em 0
+                
+                /* Highlight menu item of the current active page (Hot/New/Submit/...) */
+                > .active_page
+                    border-bottom   3px solid rgb(255, 175, 50)
+                
+                /* Highlight username if there are unread messages */
+                .new_messages
+                    background-color    rgb(255, 175, 50)
+                    border-radius       4px
+                    color               #fff
+                    font-weight         bold
+                    margin              0
+                    padding             .5em .5em
+                    text-decoration     none
+        
+        
+        > .content
+            padding     1em 0
+            line-height 1.5em
+        
+            .vote
+                margin 0 1.5em 0 0
+            
+                > a
+                    display:        inline-block
+                    margin:         0
+                    overflow:       hidden
+                    padding:        0
+                    text-decoration none
+                    vertical-align  middle
+                
+                /* up-down arrows are images */
+                img
+                    cursor  pointer
+                    height  1em
+                    margin  0
+                    padding .2em
+                    float   left
+                
+                /* Arrow style if already upvoted (green) */
+                .upvoted
+                    background-color    #fff
+                    border              1px solid #00E313
+                    border-radius       999em
+                
+                /* Arrow style if already upvoted (red) */
+                .downvoted
+                    background-color    #fff
+                    border              1px solid #FF0000
+                    border-radius       999em
+                
+                /* Votes counter */
+                .count
+                    margin 0 .5em
+            
+            /* Home page */
+            .posts
+                
+                /* A singe post */
+                .post
+                    margin          0 0 2em 0
+                    vertical-align  top
+                
+                    > .title
+                        font-size 1.5em
+                    
+                        > a
+                            color #000
+                    
+                    /* Some post info showed below the title */
+                    > .info
+                        color   #666
+                        margin  .5em 0
+                        opacity .8
+            
+            /* New submission page */
+            > form.submit
+                margin      auto
+                max-width   30em
+            
+            /* Page for a post */
+            > .post
+                
+                /* Style used to format Markdown tables */
+                table
+                    background      #fff
+                    border-collapse collapse
+                    text-align      left
+                
+                    th
+                        border-bottom   2px solid #6678b1
+                        color           #039
+                        font-weight     normal
+                        padding         0 1em
+                    
+                    td
+                        border-bottom   1px solid #ccc
+                        color           #669
+                        padding         .5em 1em
+                    
+                    tbody tr:hover td
+                        color #009
+                
+                /* The post title */
+                > .title
+                    font-size 1.5em
+                
+                /* Info below post title */
+                .info
+                    margin 1em 0
+                
+                /* Post text */
+                > .text
+                    margin      1em 2.5em
+                    word-wrap   break-word
+                
+                /* The "new comment" form for this post page */
+                .new_comment
+                    margin      0 2.5em
+                    overflow    hidden
+                    
+                    > textarea
+                        height              2.5em
+                        
+                        -webkit-transition  1s
+                        transition          1s
+                    
+                    > textarea:focus
+                        height 10em
+                    
+                    > input[type=submit]
+                        float   right
+                        margin  1em 0
+                
+                /* Comments tree for the Post page */
+                > .comments
+                    margin 5em 0 0 0
+                    
+                    /* A single comment in the tree */
+                    > .comment
+                        margin      0 0 2em 0
+                        overflow    hidden
+                        
+                        /* This is just a mark to indicate the beginning
+                        * of a new comment. The only reason for this is
+                        * to make the thread more readable
+                        */
+                        > .pin
+                            color           #f00 /* #CD006B */
+                            float           left
+                            font-size       .5em
+                            padding         0 1em 0 0
+                            vertical-align  top
+                        
+                        /* Some info about this comment */
+                        > .info
+                            font-size   .9em
+                            margin      0 0 0 1em
+                        
+                            .username > a,
+                            .username > a:hover
+                                font-weight bold
+                            
+                            .op > a,
+                            .op > a:hover
+                                background-color    rgb(255, 175, 50)
+                                border-radius       4px
+                                color               #fff
+                                font-weight         bold
+                                margin              0 .5em 0 0
+                                padding             0em 0.5em
+                                text-decoration     none
+
+                            > .vote
+                                margin 0 1em
+
+                        /* The comment text */
+                        > .text
+                            margin     .5em 0 0 1.5em
+                            word-wrap  break-word
+
+                    /* Give the comment that's linked to in the URL location hash a lightyellow background color */
+                    .comment:target
+                        background-color lightyellow
+            
+            /* User home page */
+            table.user
+                /* If one length specified: both horizontal and vertical spacing
+                * If two length specified: first sets the horizontal spacing, and
+                *                          the second sets the vertical spacing
+                */
+                border-spacing  2em 1em
+                border-collapse separate
+                margin          auto
+                width           80%
+                
+                tr
+                    > td:first-child
+                        font-weight     bold
+                        text-align      right
+                        vertical-align  top
+                        width           30%
+                    
+                    > td:last-child
+                        text-align  left
+                
+            /* User activity */
+            > .user_activity
+            
+                > *
+                    margin 0 0 2em 0
+                
+                    > .info
+                        color #888
+            
+            /* Login page */
+            > .login
+                margin      auto
+                max-width   20em
+                
+                input[type=submit]
+                    margin 1em 0
+                
+                .title
+                    line-height 2em
+            
+            /* Page to edit a post or a comment */
+            > .edit
+            {
+            }
+            
+            /* Page to reply to a comment */
+            > .reply
+            {
+            }
+            
+            /* About page */
+            > .about
+            
+                > h3
+                    margin 1em 0 .5em 0
+                
+                > p
+                    line-height 1.5em
+            
+        > footer
+            border-top  1px solid #6ECFFF
+            margin      3em 0 0 0
+            padding     2em 0
+            
+            img
+                height          1.2em
+                margin          0 .5em 0 0
+                vertical-align  middle
+            
+            > ul
+                list-style  none
+                margin      0
+                overflow    hidden
+                padding     0
+            
+                > li
+                    float   left
+                    margin  0 2em 0 0

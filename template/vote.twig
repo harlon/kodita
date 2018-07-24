@@ -1,0 +1,32 @@
+{# Template for up/down vote arrows.
+ # This template expects these inputs
+ # 
+ #     - target: ('post', 'comment')
+ #     - hash_id: the post/comment hashId
+ #     - vote: (optional) the vote already cast by current logged in user
+ #     - vote_count: the sum of votes for this post/comment
+ #     - user: reference to logged in user
+ #}
+
+<span class="vote">
+
+    {% if user %}
+        
+        <a href="vote?up&{{ target }}={{ hash_id }}" target="vote_sink" class="{{ vote is defined and vote == 1 ? 'upvoted' }}">
+            <img title="bump" alt="bump" src="images/upvote.png" />
+        </a>
+
+        {# Show number of votes #}
+        <span class="count">{{ vote_count }}</span>
+
+        <a href="vote?down&{{ target }}={{ hash_id }}" target="vote_sink" class="{{ vote is defined and vote == -1 ? 'downvoted' }}">
+            <img title="sink" alt="sink" src="images/downvote.png" />
+        </a>
+
+    {% else %}
+        
+        {{ vote_count ~ ' vote' ~ (vote_count != 1 ? 's') }}
+    
+    {% endif %}
+    
+</span>

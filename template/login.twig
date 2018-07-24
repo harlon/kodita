@@ -1,0 +1,62 @@
+{% include 'header.twig' %}
+
+<div class="login">
+    {% if feedback %}
+        <div class="alert bg-red">
+            {{ feedback }}
+        </div>
+    {% endif %}
+
+    <h3>Ingreso</h3>
+
+    <form action="" method="post">
+        <div class="title">
+            Usuario
+        </div>
+        <div>
+            <input type="text" name="username" class="form-control" />
+        </div>
+
+        <div class="title">
+            Contraseña
+        </div>
+        <div>
+            <input type="password" name="password" class="form-control" />
+        </div>
+
+        <div>
+            <input type="submit" name="login" class="button button_info" value="Ingresar" />
+            
+            <a href="login_reset">Resetear contraseña</a>
+        </div>
+    </form>
+
+    <h3>Crear nueva cuenta</h3>
+
+    <form action="" method="post">
+        <div class="title">
+            Usuario
+        </div>
+        <div>
+            <input type="text" name="username" class="form-control" />
+        </div>
+
+        <div class="title">
+            Contraseña
+        </div>
+        <div>
+            <input type="password" name="password" class="form-control" />
+            <em>Debe tener 8 caracteres</em>
+        </div>
+
+        <div>
+            <input type="submit" name="new_account" class="button button_info" value="Crear Cuenta" />
+        </div>
+    </form>
+</div>
+
+{% include 'footer.twig' %}
+
+
+
+

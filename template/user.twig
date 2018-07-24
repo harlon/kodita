@@ -1,0 +1,99 @@
+{% include 'header.twig' %}
+
+{% if profile == 'private' %}
+
+    <form action="" method="post">
+        <table class="user">
+            <tr>
+                <td>
+                    User
+                </td>
+                <td>
+                    {{ user.name }}
+                    
+                    <div><a href="{{ 'user_activity/posts'|docroot }}">Tus posts</a></div>
+                    <div><a href="{{ 'user_activity/comments'|docroot }}">Tus comentarios</a></div>
+                    <div><a href="{{ 'user_activity/replies'|docroot }}">Respuestas a tus comentarios</a></div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    Desde
+                </td>
+                <td>
+                {{ user.registered|date("F, jS Y H:i") }} ({{ user.registered|ago }})
+                </td>
+            </tr>
+                
+            <tr>
+                <td>
+                    Acerca
+                </td>
+                <td>
+                    <textarea name="about" class="form-control">{{ user.about }}</textarea>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    Email
+                </td>
+                <td>
+                    <input type="text" name="email" class="form-control" value="{{ user.email }}" />
+                    <em>Requerido si quieres cambiar tu contraseña</em>
+                    {#
+                    <p>
+                        <label>
+                            <input type="checkbox" name="email_notifications" {{ user.email_notifications ? 'checked="checked"' }} />
+                            Send notifications via email
+                        </label>
+                    </p>
+                    #}
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit" name="update" value="Actualizar" class="button button_info" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+{% else %}
+
+    <table class="user">
+        <tr>
+            <td>
+                Usuario
+            </td>
+            <td>
+                {{ other_user.username }}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Desde
+            </td>
+            <td>
+                {{ other_user.registered|date("F, jS Y H:i") }} ({{ other_user.registered|ago }})
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Acerca
+            </td>
+            <td>
+                {{ other_user.about|markdown|raw }}
+            </td>
+        </tr>
+    </table>
+
+{% endif %}
+
+{% include 'footer.twig' %}

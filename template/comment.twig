@@ -1,0 +1,56 @@
+{% if comments[parent_id] %}
+    {% for comment in comments[parent_id] %}
+        
+        {# The id="" is used as anchor #}
+        <div class="comment" style="margin-left:{{ depth * 2 }}em" id="comment-{{ comment.hashId }}">
+            <div class="pin">◉</div>
+            
+            <div class="info">
+                {# Username #}
+                <span class="username {{ post.userId == comment.userId ? 'op' }}">
+                    <a href="{{ ('user/' ~ comment.username|url_encode)|docroot }}">{{ comment.username }}</a>
+                </span>
+                
+                {%
+                include 'vote.twig' with {
+                    target: 'comment',
+                    hash_id: comment.hashId,
+                    vote: votes[comment.id] is defined ? votes[comment.id].vote : null,
+                    vote_count: comment.vote,
+                    user: user is defined ? user : null
+                } only
+                %}
+                
+                {# DateTime #}
+                <a href="{{ ('post/' ~ post.hashId ~ '#comment-' ~ comment.hashId)|docroot }}"><time title="{{ comment.created|title }}" datetime="{{ comment.created|datetime }}"><em> {{ comment.created|ago }} </em></time></a>
+                
+                {% if user %}
+                    —
+                    
+                    {# Reply #}
+                    <a href="../reply?comment={{ comment.hashId }}">Contestar</a>
+                    
+                    {% if comment.userId == user.id %}
+                        {# Edit #}
+                        <a href="../edit?comment={{ comment.hashId }}">Editar</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+            <div class="text">
+                {{ comment.text|markdown|raw }}
+            </div>
+        </div>
+        
+        {# Add replies #}
+        
+        {% include 'comment.twig' with {
+            'post': post,
+            'comments': comments,
+            'votes': votes,
+            'parent_id': comment.id,
+            'depth': depth + 1
+        } %}
+        
+    {% endfor %}
+{% endif %}

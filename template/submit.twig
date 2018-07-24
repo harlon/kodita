@@ -1,0 +1,28 @@
+{% include 'header.twig' %}
+
+
+{# "shortcut-submit" is a class used exclusively from javascript
+ # to submit the form when a key (Ctrl+Enter) is pressed.
+ #}
+<form action="" method="post" class="submit shortcut-submit">
+    <h3>Titulo <em>(requerido)</em></h3>
+    <div>
+        <input type="text" name="title" class="form-control" />
+    </div>
+
+    <h3>Link</h3>
+    <div>
+        <input type="text" name="link" class="form-control" />
+    </div>
+
+    <h3>Texto</h3>
+    <div>
+        <textarea name="text" rows=10 class="form-control"></textarea>
+    </div>
+
+    <div style="margin: 1em 0 0 0;">
+        <input type="submit" class="button button_info" value="Enviar post" />
+    </div>
+</form>
+
+{% include 'footer.twig' %}

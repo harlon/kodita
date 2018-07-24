@@ -1,0 +1,59 @@
+{% include 'header.twig' %}
+
+<div class="login">
+    {% if feedback %}
+        <div class="alert bg-red">
+            {{ feedback }}
+        </div>
+    {% endif %}
+
+    {% if token_sent is defined %}
+    
+       Si tu usuario ya tiene este email, se te enviará un código
+    
+    {% elseif token is defined %}
+    
+        <h3>Resetear contraseña</h3>
+        
+        <p style="margin: 1em 0 2em 0;">
+            Inserta tu nueva contraseña.
+        </p>
+        
+        <form action="" method="post">
+            <input type="hidden" name="token" value="{{ token }}" />
+            <div>
+                <input type="password" name="password" class="form-control" />
+            </div>
+            
+            <div>
+                <input type="submit" name="validate" class="button button_info" value="Actualizar" />
+            </div>
+        </form>
+        
+    {% else %}
+    
+        <h3>Resetea contraseña</h3>
+        
+        <p style="margin: 1em 0 2em 0;">
+            Inserta tu  <strong>usuario</strong>. Recibiras un email para resetear tu contraseña
+        </p>
+        
+        <form action="" method="post">
+            <div>
+                <input type="text" name="username" class="form-control" />
+            </div>
+
+            <div>
+                <input type="submit" name="reset" class="button button_info" value="Renviar codigo" />
+            </div>
+        </form>
+        
+    {% endif %}
+    
+</div>
+
+{% include 'footer.twig' %}
+
+
+
+

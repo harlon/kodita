@@ -1,0 +1,31 @@
+{% include 'header.twig' %}
+
+<div class="reply">
+    <h3>Responder a<em><a href="{{ ('user/' ~ comment.username|url_encode)|docroot }}">{{ comment.username }}</a></em></h3>
+    
+    <div class="info">
+    posteado <em><a href="{{ 'post/'|docroot ~ comment.postHashId }}#comment-{{ comment.hashId }}"><time title="{{ post.created|title }}" datetime="{{ post.created|datetime }}"> {{ comment.created|ago }} </time></a></em>
+        en <a href="{{ ('post/' ~ comment.postHashId)|docroot }}">{{ comment.postTitle }}</a>
+    </div>
+
+    <div style="margin: 2em 0;">
+        {{ comment.text|markdown|raw }}
+    </div>
+
+    {# "shortcut-submit" is a class used exclusively from javascript
+     # to submit the form when a key (Ctrl+Enter) is pressed.
+     #}
+    <form action="" method="post" class="shortcut-submit">
+        <input type="hidden" name="parent_comment" value="{{ comment.hashId }}" />
+        
+        <div style="margin: 2em 0;">
+            <textarea name="text" required="required" rows=10 class="form-control"></textarea>
+        </div>
+
+        <div>
+            <input type="submit" class="button button_info" value="Responder" />
+        </div>
+    </form>
+</div>
+
+{% include 'footer.twig' %}

@@ -1,0 +1,195 @@
+*
+    margin      0
+    padding     0
+    font-family "Helvetica Neue", Helvetica, Arial, sans-serif
+
+    -moz-box-sizing     border-box
+    -webkit-box-sizing  border-box
+    box-sizing          border-box
+
+a, a:hover, a:visited
+    background          transparent
+    color               #337ab7
+    text-decoration     none
+
+blockquote
+    background-color    #f8f8f8
+    border-left         5px solid #e9e9e9
+    font-size           .85em
+    margin              1em 0
+    padding             .5em 1em
+
+blockquote cite
+    color       #999
+    display     block
+    font-size   .8em
+    margin-top  1em
+
+blockquote cite:before
+    content "\2014 \2009"
+
+h3
+    font-size   1.5em
+    font-weight normal
+    margin      1em 0 .5em 0
+    
+p
+    margin  0 0 10px 0
+
+.bg-green
+    background-color    #d9ffca
+    border-radius       4px
+    padding             .5em 1em
+
+.bg-red
+    background-color    #f2dede
+    border-radius       4px
+    padding             .5em 1em
+
+.bg-blue
+    background-color    #337ab7
+    border-radius       4px
+    padding             .5em 1em
+
+.bg-light-blue
+    background-color    #d9edf7
+    border-radius       4px
+    padding             .5em 1em
+
+/* Some styles for buttons */
+.button
+    border              0px
+    border-radius       4px
+    cursor              pointer
+    display             inline-block
+    padding             .2em 1em
+    text-align          center
+
+.button_ok              /* Green */
+.button_ok:hover,
+.button_ok:visited
+    background-color    #4caf50
+    color               #fff
+
+.button_info            /* Blue */
+.button_info:hover,
+.button_info:visited
+    background-color    #008cba
+    color               #fff
+
+.button_alert           /* Red */
+.button_alert:hover,
+.button_alert:visited
+    background-color    #f44336
+    color               #fff
+
+.button_default         /* Gray */
+.button_default:hover,
+.button_default:visited
+    background-color    #e7e7e7
+    color               #000
+
+.button_default1,       /* Black */
+.button_default1:hover,
+.button_default1:visited
+    background-color    #555
+    color               #fff
+
+img
+    /* Prevent images from taking up too much space in comments */
+    max-width   100%
+
+label
+    cursor      pointer
+    font-weight normal
+
+/* Add light blue shadow to form controls */
+.form-control:focus
+    border-color        #66afe9
+    outline             0
+    -webkit-box-shadow  inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+    box-shadow          inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+
+.form-control
+    display             block
+    width               100%
+    padding             .5em 1em
+    line-height         1.42857143
+    color               #555
+    border              1px solid #ccc
+    border-radius       4px
+    -webkit-box-shadow  inset 0 1px 1px rgba(0,0,0,.075)
+    box-shadow          inset 0 1px 1px rgba(0,0,0,.075)
+    -webkit-transition  border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s
+    -o-transition       border-color ease-in-out .15s,box-shadow ease-in-out .15s
+    transition          border-color ease-in-out .15s,box-shadow ease-in-out .15s
+
+/* When users vote, this <iframe/> is used as target, such that
+ * the page is not reloaded
+ */
+.vote_sink
+    height      1px;
+    left        -10px
+    position    fixed
+    top         -10px
+    width       1px
+    
+html, body
+    background-color    #fff
+    font-size           1em
+    height              100%
+    line-height         1em
+    margin              0
+    padding             0
+    width               100%
+
+pre
+    background-color    #f9f9f9
+    font-family         "Courier 10 Pitch", Courier, monospace
+    font-size           95%
+    line-height         140%
+    white-space         pre
+    white-space         pre-wrap
+    white-space         -moz-pre-wrap
+    white-space         -o-pre-wrap
+
+    code
+        font-family         Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace
+        font-size           95%
+        line-height         140%
+        white-space         pre
+        white-space         pre-wrap
+        white-space         -moz-pre-wrap
+        white-space         -o-pre-wrap
+
+/* Monospace <pre/> to write some nice ASCII art in frontpage */
+pre.new_year
+    background-color    transparent
+    color               #BF0000
+    font-family         monospace
+    font-size           .8rem
+    font-webkit         bold
+    margin              0 0 2em 0
+    text-align          center
+    white-space         pre
+    white-space         pre-wrap
+    white-space         -moz-pre-wrap
+    white-space         -o-pre-wrap
+
+/* Inline code */
+p > code
+    background-color    #f5f5f5
+    border-radius       3px
+    display             inline-block
+    font-family         Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace
+    font-size           85%
+    line-height         140%
+    margin              0 .2em
+    padding             .2em
+    white-space         pre
+    white-space         pre-wrap
+    white-space         -moz-pre-wrap
+    white-space         -o-pre-wrap
+
+ul, ol
+    margin              1.2em 2em

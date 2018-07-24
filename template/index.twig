@@ -1,0 +1,68 @@
+{% include 'header.twig' %}
+
+<div class="posts">
+    
+    {# banner
+        <div class="bg-green" style="margin: 0 0 2em 0; padding: .5em;">
+            <img alt="" title="" src="images/pulse.gif" style="height: 1em;" />
+            <a href="">KODA 2018</a>
+        </div>
+    #}
+    
+    {# 
+                    .''.    
+  .        *''*    :_\/_:   
+_\(/_  .:.*_\/_*   : /\ :   
+./)\   ':'* /\ * :  '..'.   
+  ' *''*    * '.\'/.' _\(/_'
+   *_\/_*     -= o =-  /)\  
+   * /\ *     .'/.\'.   ' KODA  
+    *..*         :          
+    ___   ___  __  ___      
+   |__ \ / _ \/_ |/ _ \     
+      ) | | | || | (_) |    
+     / /| | | || |> _ <     
+    / /_| |_| || | (_) |    
+   |____|\___/ |_|\___/     
+    </pre>
+    #}
+    
+    {% for post in posts %}
+    
+        <div class="post">
+            <div class="title">
+                {% if post.link|length > 0 %}
+                    <a href="{{ post.link }}">{{ post.title }}</a>
+                {% else %}
+                    <a href="post/{{ post.hashId }}">{{ post.title }}</a>
+                {% endif %}
+            </div>
+            
+            <div class="info">
+                {%
+                    include 'vote.twig' with {
+                        target: 'post',
+                        hash_id: post.hashId,
+                        vote: votes[post.id] is defined ? votes[post.id].vote : null,
+                        vote_count: post.vote,
+                        user: user is defined ? user : null
+                    } only
+                %}
+                
+                <em><a href="post/{{ post.hashId }}"><time title="{{ post.created|title }}" datetime="{{ post.created|datetime }}"> {{ post.created|ago }} </time></em>
+                por <a href="{{ ('user/' ~ post.username|url_encode)|docroot }}">{{ post.username }}</a>
+                —
+                <a href="post/{{ post.hashId }}#comments">{{ post.commentsCount ? post.commentsCount }} comentarios</a>
+            </div>
+        </div>
+        
+    {% endfor %}
+    
+    <div class="more">
+        <a href="?page={{ page_number + 1 }}" class="button button_default1">
+            Ver Mas
+        </a>
+    </div>
+</div>
+
+{% include 'footer.twig' %}

@@ -1,0 +1,54 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    Options -MultiViews
+    RewriteEngine On
+    RewriteBase /kodaposting/
+    
+    # Remove trailing slashes
+    RewriteRule (.*)/+$ http://localhost/kodaposting/$1 [NC,R=301,QSA]
+    
+    # Rewrite for public assets
+    RewriteRule .+/css/(.+)$ css/$1 [NC,L,QSA]
+    RewriteRule .+/images/(.+)$ images/$1 [NC,L,QSA]
+    RewriteRule .+/javascript/(.+)$ javascript/$1 [NC,L,QSA]
+    
+    # community/[community name]/post/[post hash_id]/[post title]/comment/[comment hash_id]
+    RewriteRule community/.+/post/(.+)/.+/comment/(.+)$ post/$1#comment-$2 [NC,NE,L,QSA,R=301]
+    # Redirect old urls
+    RewriteRule community/.+/post/(.+)/.+$ post/$1 [NC,L,QSA,R=301]
+    RewriteRule community/.+/post/(.+)/*$ post/$1 [NC,L,QSA,R=301]
+    # community/[community name]
+    RewriteRule community/.+$ / [NC,L,QSA,R=301]
+    
+    # Redirect /new to index.php
+    RewriteRule ^new$ index.php?new [NC,L,QSA]
+    
+    # For votes from post/...
+    RewriteRule post/vote$ vote.php [NC,L,QSA]
+    
+    # Show a post's page
+    RewriteRule post/(.+)$ post.php?hash_id=$1 [NC,L,QSA]
+    
+    # Show a user's public profile
+    RewriteRule user/(.+)$ user.php?username=$1 [NC,L,QSA]
+    
+    # Show a user's activity (private only)
+    RewriteRule user_activity/(.+)$ user_activity.php?$1 [NC,L,QSA]
+    
+    # RSS
+    RewriteRule ^rss/(.+)$ rss.php?sort=$1 [NC,L,QSA]
+    RewriteRule ^rss$ rss/hot [NC,L,R=301]
+    
+    # Rewrite to the corresponding .php page
+    # Not a directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # A HTML file exists
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    # Route URL to the right HTML page
+        RewriteRule (.+) $1.php [NC,L,QSA]
+    
+    # If the requested filename exists, simply serve it.
+    # We only want to let Apache serve files and not directories.
+    RewriteCond %{REQUEST_FILENAME} -f
+        RewriteRule .? - [L]
+</IfModule>

@@ -1,0 +1,32 @@
+{% include 'header.twig' %}
+
+<div class="user_activity">
+
+    {% for post in posts %}
+        
+        <div>
+            {# Post title #}
+            {% if post.link|length > 0 %}
+                <a href="{{ post.link }}">
+                    {{ post.title }}
+                </a>
+            {% else %}
+                <a href="../post/{{ post.hashId }}">
+                    {{ post.title }}
+                </a>
+            {% endif %}
+            
+            {# Post info #}
+            <div class="info">
+                {{ post.vote }} votos,
+                <time title="{{ post.created|title }}" datetime="{{ post.created|datetime }}"><em> {{ post.created|ago }} </em></time>
+                —
+                <a href="../post/{{ post.hashId }}">{{ post.commentsCount }} comentarios</a>
+            </div>
+        </div>
+        
+    {% endfor %}
+
+</div>
+        
+{% include 'footer.twig' %}

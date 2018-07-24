@@ -1,0 +1,33 @@
+{% include 'header.twig' %}
+
+<div class="edit">
+    <h3>
+        Editado: {{ item.data.postTitle }}
+    </h3>
+
+    <div class="info">
+        en <a href="{{ ('user/' ~ item.data.username|url_encode)|docroot }}">{{ item.data.username }}</a>
+        <time title="{{ item.data.created|title }}" datetime="{{ item.data.created|datetime }}"><em> {{ item.data.created|ago }} </em></time>
+    </div>
+
+    <div style="margin: 2em 0;">
+        {{ item.data.text|markdown|raw }}
+    </div>
+    
+    {# "shortcut-submit" is a class used exclusively from javascript
+     # to submit the form when a key (Ctrl+Enter) is pressed.
+     #}
+    <form action="" method="post" class="shortcut-submit">
+        <input type="hidden" name="comment" value="{{ item.data.hashId }}" />
+        
+        <div style="margin: 2em 0;">
+            <textarea name="text" rows=10 class="form-control">{{ item.data.text }}</textarea>
+        </div>
+
+        <div>
+            <input type="submit" class="button button_info" value="Guardar Cambios" />
+        </div>
+    </form>
+</div>
+
+{% include 'footer.twig' %}

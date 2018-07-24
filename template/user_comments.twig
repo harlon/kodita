@@ -1,0 +1,22 @@
+{% include 'header.twig' %}
+
+<div class="user_activity">
+
+    {% for comment in comments %}
+        
+        <div>
+            {{ comment.text|slice(0, 256)|markdown|raw }}
+            
+            {# Post info #}
+            <div class="info">
+                <a href="../post/{{ comment.postHashId }}#comment-{{ comment.hashId }}">read</a>
+                —
+                <time title="{{ comment.created|title }}" datetime="{{ comment.created|datetime }}"><em> {{ comment.created|ago }} </em></time> on <a href="../post/{{ comment.postHashId }}">{{ comment.postTitle }}</a>
+            </div>
+        </div>
+        
+    {% endfor %}
+
+</div>
+        
+{% include 'footer.twig' %}

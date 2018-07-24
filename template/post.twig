@@ -1,0 +1,60 @@
+{% include 'header.twig' %}
+
+<div class="post">
+
+    <div class="title">
+        {% if post.link|length > 0 %}
+            <a href="{{ post.link }}">
+                {{ post.title }}
+            </a>
+        {% else %}
+            {{ post.title }}
+        {% endif %}
+    </div>
+
+    <div class="info">
+        {%
+        include 'vote.twig' with {
+            target: 'post',
+            hash_id: post.hashId,
+            vote: votes.post[post.id] is defined ? votes.post[post.id].vote : null,
+            vote_count: post.vote,
+            user: user is defined ? user : null
+        } only
+        %}
+        
+        por <a href="{{ ('user/' ~ post.username|url_encode)|docroot }}">{{ post.username }}</a><time title="{{ post.created|title }}" datetime="{{ post.created|datetime }}"><em> {{ post.created|ago }} </em></time>
+        — {{ post.vote }} votos, <a href="#comments">{{ post.commentsCount }} comentarios</a>
+        
+        {% if user and post.userId == user.id %}
+            — <a href="../edit?post={{ post.hashId }}">Editar</a>
+        {% endif %}
+    </div>
+    
+    <div class="text">
+        {{ post.text|markdown|raw }}
+    </div>
+    
+    {% if user %}
+        {# "shortcut-submit" is a class used exclusively from javascript
+         # to submit the form when a key (Ctrl+Enter) is pressed.
+         #}
+        <form action="" method="post" class="new_comment  shortcut-submit">
+            <textarea name="new_comment" required="required" class="form-control" placeholder="Escribe un comentario"></textarea>
+            <input type="submit" value="Añadir comentario" class="button button_info" />
+        </form>
+    {% endif %}
+    
+    {# id="" used as anchor #}
+    <div class="comments" id="comments">
+        {% include 'comment.twig' with {
+            'post': post,
+            'comments': comments,
+            'votes': votes.comment,
+            'parent_id': 0,
+            'depth': 0
+        } %}
+    </div>
+</div>
+
+{% include 'footer.twig' %}

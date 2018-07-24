@@ -1,0 +1,30 @@
+            {# End of <div class="content"> defined in header.twig #}
+            </div>
+
+            <footer>
+                <p>
+                    Página corriendo sobre <a href="http://creativecommons.org/licenses/by/4.0">Creative Commons Attribution 4.0 International License</a>.
+                </p>
+
+                <ul>
+                   
+                  {#  <li>
+                        <img alt="RSS" title="" src="images/rss.png" />
+                        <a href="{{ 'rss/hot'|docroot }}">Hot</a> •
+                        <a href="{{ 'rss/new'|docroot }}">New</a>
+                    </li> #}
+                  
+                  
+                    
+                </ul>
+            </footer>
+        </div>
+
+        {# When users vote, this <iframe/> is used as target, such that
+         # the page is not reloaded
+         #}
+        <iframe name="vote_sink" class="vote_sink"></iframe>
+
+        <script src="javascript/kodaposting.js"></script>
+    </body>
+</html>

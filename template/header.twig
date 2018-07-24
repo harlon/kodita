@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="css/kodapost.css" rel="stylesheet">
+        
+        <title>{{ title is defined ? title ~ ' - ' }}KodaPosting</title>
+    </head>
+    
+    <body>
+        <div class="container">
+        
+            <div class="header">
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <a href="{{ ''|docroot }}" class="logo">
+                            
+                            
+                            {# &nbsp; is an extra space because "post" is displayed attached to the picture (not sure why) #}
+                            <img alt="&nbsp;" title="KodaPosting" src="http://cdn.onlinewebfonts.com/svg/img_198794.png" />
+                           KodaPosting
+                        </a>
+                    </div>
+                    
+                    <div class="flex-item">
+                        <form action="{{ 'search'|docroot }}">
+                            <input type="text" name="q" value="{{ query }}" placeholder="Buscar posts" />
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="menu">
+                    <a href="{{ ''|docroot }}" class="flex-item {{ page == "hot" ? "active_page" }}">Hot</a>
+                    <a href="{{ 'new'|docroot }}" class="flex-item {{ page == "new" ? "active_page" }}">Nuevo</a>
+
+                    {% if user %}
+                        {% set unread_messages = new_messages() %}
+                        
+                        <a href="{{ 'submit'|docroot }}" class="flex-item {{ page == "submit" ? "active_page" }}">Postear</a>
+                        
+                        {% if unread_messages %}
+                            <a href="{{ 'user_activity/replies'|docroot }}" class="new_messages flex-item">
+                                {{ user.name }} ({{ unread_messages }})
+                            </a>
+                        {% else %}
+                            <a href="{{ 'user'|docroot }}" class="flex-item">
+                                {{ user.name }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+
+                    <a href="{{ 'about'|docroot }}" class="flex-item {{ page == "about" ? "active_page" }}">Acerca</a>
+                    
+                    {% if user  %}
+                        <a href="{{ 'logout'|docroot }}" class="flex-item">Salir</a>
+                    {% else %}
+                        <a href="{{ 'login'|docroot }}" class="flex-item {{ page == "login" ? "active_page" }}">Ingresar</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="content">
