@@ -5,33 +5,92 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link href="css/kodapost.css" rel="stylesheet">
-        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="lib/jquery-3.3.1.slim.min.js" ></script>
+        <script src="lib/popper.js/popper.min.js" ></script>
+        <script src="lib/bootstrap.min.js" ></script>
         <title>{{ title is defined ? title ~ ' - ' }}KodaPosting</title>
     </head>
     
     <body>
-        <div class="container">
-        
+     
+    {# INICIO NAV MOBILE#}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-md-none">
+  <a class="navbar-brand" href="{{ ''|docroot }}">
+      <img src="http://blackshepherdstrategies.com/images/BS_dog_icon_white.png" width="30" height="30" class="d-inline-block align-top" alt="">
+KodaPosting
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+   <a href="{{ ''|docroot }}" class="nav-link {{ page == "hot" ? "active" }}">Hot</a>
+      </li>
+      <li class="nav-item">
+   <a href="{{ 'new'|docroot }}" class="nav-link {{ page == "new" ? "active" }}">Nuevo</a>
+      </li>
+      
+       {% if user %}
+          {% set unread_messages = new_messages() %}
+            <li class="nav-item">
+            <a href="{{ 'submit'|docroot }}" class="nav-link {{ page == "submit" ? "active" }}">Postear</a>
+            </li>        
+            {% if unread_messages %}
+            <li class="nav-item">
+              <a href="{{ 'user_activity/replies'|docroot }}" class="new_messages nav-link">
+               {{ user.name }} ({{ unread_messages }})
+               </a>
+               </li>  
+                {% else %}
+                <li class="nav-item">
+                        <a href="{{ 'user'|docroot }}" class="nav-link">
+                        {{ user.name }}
+                            </a>
+                </li> 
+                        {% endif %}
+                    {% endif %}
+                    <li class="nav-item">
+                    <a href="{{ 'about'|docroot }}" class="nav-link {{ page == "about" ? "active" }}">Acerca</a>
+                    </li> 
+                    {% if user  %}
+                     <li class="nav-item">
+                        <a href="{{ 'logout'|docroot }}" class="nav-link">Salir</a>
+                          </li> 
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{{ 'login'|docroot }}" class="nav-link {{ page == "login" ? "active" }}">Ingresar</a>
+                    </li>
+                    {% endif %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{{ 'search'|docroot }}">
+            <input class="form-control mr-sm-2" name="q" value="{{ query }}"  type="text" placeholder="Buscar" aria-label="Buscar Post">
+         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+         </form>
+    </div>
+ </nav>
+    <div class="container">
+        {# FIN NAV MOBILE#}
             <div class="header">
-                <div class="flex-container">
-                    <div class="flex-item">
+                <div class="flex-container ">
+                    <div class="flex-item d-sm-none d-none  d-md-block">
                         <a href="{{ ''|docroot }}" class="logo">
-                            
-                            
                             {# &nbsp; is an extra space because "post" is displayed attached to the picture (not sure why) #}
                             <img alt="&nbsp;" title="KodaPosting" src="http://cdn.onlinewebfonts.com/svg/img_198794.png" />
                            KodaPosting
                         </a>
                     </div>
                     
-                    <div class="flex-item">
+                    <div class="flex-item d-sm-none  d-none d-md-block">
                         <form action="{{ 'search'|docroot }}">
                             <input type="text" name="q" value="{{ query }}" placeholder="Buscar posts" />
                         </form>
                     </div>
                 </div>
                 
-                <div class="menu">
+                <div class="menu  d-sm-none d-none  d-md-block ">
                     <a href="{{ ''|docroot }}" class="flex-item {{ page == "hot" ? "active_page" }}">Hot</a>
                     <a href="{{ 'new'|docroot }}" class="flex-item {{ page == "new" ? "active_page" }}">Nuevo</a>
 
