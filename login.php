@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             exit ();
         
         $username = $_POST['username'];
-        $password = "holita";
+        $password = $_POST['password'];
         
         // Check username/password
         $user = $db->check_user_credentials ($username, $password);
