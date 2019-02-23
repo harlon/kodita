@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     $db = new Database();
     $db->connect ();
-    if= 192.168.78.1:8080;
+    $db="192.168.78.1:8080";
     // Process login request
     if (isset ($_POST['login']))
     {
