@@ -14,7 +14,7 @@ class Database
     protected static function get_random_string ($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
         $characters_length = strlen ($characters);
-        $password='mycontraseña';
+        
         $hash_id = '';
         
         for ($i = 0; $i < $length; $i++)
