@@ -104,7 +104,6 @@ class Database
         try {
             
             $this->database->beginTransaction();
-            $password='MADUROFUERA';
             $user = NULL;
             
             if (is_null ($this->database))
