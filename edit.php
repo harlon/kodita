@@ -112,9 +112,9 @@ if (!isset ($_GET['post']) && !isset ($_GET['comment']))
 }
 
 // Is user editing a post or a comment?
-if (isset ($_GET['password']))
+if (isset ($_GET['post']))
     $item = array(
-        'type' => 'password',
+        'type' => 'post',
         'data' => $db->get_post ($_GET['post']));
 else
     $item = array(
